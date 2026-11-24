@@ -33,6 +33,28 @@ npx skills add pinguxx/skills --skill javascript-review --global
 | `motion-craft` | CSS transition and animation standards (explicit properties, tight durations, origin-aware overlays, reduced motion). |
 | `release-hygiene` | Pre-release checklist covering repo-wide stale version sweeps, dead file pruning, docs sync, and verification gates. |
 
+## Workflow: creating and shipping a project
+
+Use the skills in order from first spec to release. Invoke a skill by name in your prompt (for example, `use plan to scope...` or `/javascript-review`).
+
+1. **Scope and plan (`plan`)**
+   Start every new project or major feature with `plan`. Define the goal, exact files to create or change, invariants, edge cases, and the verification commands before writing code.
+2. **Build step by step (`implement-plan`)**
+   Execute the approved plan one step at a time with `implement-plan`. Run the narrowest test after each step and keep edits scoped to the plan.
+3. **Polish UI behavior (`mobile-craft`, `motion-craft`)**
+   When building web UI, apply `mobile-craft` for touch targets, `100dvh`, safe areas, and sticky-hover guards, and `motion-craft` for explicit transitions and reduced-motion rules.
+4. **Verify critical invariants (`formal-verification`)**
+   If the project has stateful logic, concurrency, reactive graphs, parsers, or security boundaries where unit tests miss edge cases, run `formal-verification` to generate a fast, project-local verifier.
+5. **Audit code, accessibility, security, and UI (`javascript-review`, `a11y-audit`, `security-audit`, `ui-stress-test`)**
+   - Run `javascript-review` on the diff for modern JS/TS, async races, leaks, and Shadow DOM traps.
+   - Run `a11y-audit` to verify WCAG 2.2 AA contrast, keyboard navigation, focus traps, and ARIA contracts.
+   - Run `security-audit` to check DOM sinks, URL validation, prototype pollution, injection, auth/CORS, and secrets.
+   - Run `ui-stress-test` across `320px` to `1440px`, light and dark modes, extreme content, and rapid interactions.
+6. **Clean the diff and docs (`code-unslop`, `unslop`)**
+   Run `code-unslop` on `git diff` to remove redundant comments, section banners, and dead wrappers. Run `unslop` on `README.md`, docs, and release notes to strip AI writing tells.
+7. **Release (`release-hygiene`)**
+   Before tagging, run `release-hygiene` to sweep the repo for stale version numbers, prune dead files, sync docs and changelogs, and verify every test, typecheck, build, and size gate passes.
+
 ## License
 
 MIT
