@@ -57,5 +57,6 @@ Record both idle startup RSS and peak RSS after sustained load so memory leaks a
 ## Verification
 1. Capture baseline RSS, latency, and binary size on `--release`.
 2. Apply targeted fixes one bottleneck at a time.
-3. Re-measure with the same command and report exact before/after numbers.
-4. Run `cargo test --workspace` and `cargo clippy --workspace --all-targets -- -D warnings` to confirm zero behavioral regressions.
+3. Re-measure with the same command, beat run-to-run variance rather than a single mean, and revert any neutral change that adds complexity without measurable gain.
+4. Log every attempt (kept and reverted: baseline to result, verdict, and reason) so failed experiments are not retried.
+5. Run `cargo test --workspace` and `cargo clippy --workspace --all-targets -- -D warnings` to confirm zero behavioral regressions.

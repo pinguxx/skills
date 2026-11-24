@@ -11,6 +11,7 @@ Audit changes across the 5 areas below. Categorize every finding as **Blocking**
 
 ## 1. Panic freedom and error handling
 - **Production unwrap and expect (Blocking):** Forbid `.unwrap()`, `.expect()`, and `panic!()` in non-test production code. Return `Result<T, E>` or `Option<T>` instead.
+- **Anti-shortcut floor (Blocking):** Flag newly added unjustified `#[allow(...)]` lint suppressions, `todo!()` or `unimplemented!()` stubs in production paths, `#[ignore]` added to failing tests, or deleted test assertions.
 - **Unchecked indexing and slicing (Blocking):** Flag direct indexing (`slice[i]`, `&s[a..b]`) on dynamic indices or untrusted lengths. Use `.get(...)` or `.split_at_checked(...)`.
 - **Integer overflow and division by zero (Important):** Guard untrusted or accumulating integer arithmetic with `checked_*` or `saturating_*` operations, and validate divisors before division or modulo.
 - **Structured errors (Important):** Use `thiserror` for typed domain and library errors with preserved source context. Return opaque external error messages to callers so internal SQL errors, paths, and tokens never leak.
@@ -42,7 +43,7 @@ Audit changes across the 5 areas below. Categorize every finding as **Blocking**
 ---
 
 ## 5. Verification
-Before approving, run the workspace toolchain and report exact pass/fail results:
+Confirm findings against callers and invariants before reporting (zero findings is a valid result), and spot-check new branch coverage with a one-condition mutation probe when test strength is unclear. Before approving, run the workspace toolchain and report exact pass/fail results:
 - `cargo fmt --check`
 - `cargo check --workspace --all-targets`
 - `cargo clippy --workspace --all-targets -- -D warnings`

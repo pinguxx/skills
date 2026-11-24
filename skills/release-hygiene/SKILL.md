@@ -18,13 +18,16 @@ Update every remaining live reference across READMEs, HTML pages, badges, API/MC
 
 ## 2. Docs & Dead File Audit
 - Check for orphaned scripts, unused demos, duplicate docs, or outdated tool/API names.
+- Check doc drift against git history (`git merge-base --is-ancestor` comparing the latest doc commit and code commit; report "can't tell" on shallow or divergent history instead of assuming current).
 - Slim down bloated docs: remove marketing filler, duplicate tables, and dead examples. Run the `unslop` skill on public READMEs and release notes.
+- Keep `CHANGELOG.md` append-only and organized by user impact (`Added`, `Changed`, `Fixed`, `Deprecated`, `Removed`, `Security`); never rewrite past entries.
 - Confirm no secrets, tokens, `.env` files, or private drafts are staged or tracked in git.
 
 ## 3. Full Verification Gates
 Before tagging or pushing a release, run all available project gates and confirm zero failures:
 1. Unit, integration, and coverage tests.
 2. Strict typecheck and linter.
-3. Production build and bundle/size budget check.
-4. Browser E2E and accessibility checks (if present).
-5. Clean `git status` and verified `CHANGELOG.md` entry for the new version.
+3. Native dependency audit against the committed lockfile (`npm audit`, `cargo audit`, `pip-audit`); isolate dependency upgrades per package against changelogs and review lockfile diffs.
+4. Production build and bundle/size budget check.
+5. Browser E2E and accessibility checks (if present).
+6. Clean `git status` and verified `CHANGELOG.md` entry for the new version.

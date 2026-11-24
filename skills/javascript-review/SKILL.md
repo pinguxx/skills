@@ -47,12 +47,14 @@ Audit changes across the 6 areas below. Categorize every finding as **Blocking**
 
 ---
 
-## 5. Security, Runtime & Bundle Hygiene
+## 5. Security, Runtime & Hygiene
 - **Dangerous Sinks (Blocking):** Block `eval()`, `new Function()`, `javascript:`, `vbscript:`, `data:text/html`, `data:image/svg+xml` URLs, and inline `on*` event attributes on untrusted inputs.
 - **Prototype Pollution & Graph Bounds (Blocking):** Any dynamic object path, JSON pointer, or deep merge helper must reject `__proto__`, `constructor`, and `prototype`, and bound recursion depth on untrusted payloads.
+- **Anti-Shortcut Floor (Blocking):** Flag newly added lint, type, or coverage suppressions (`@ts-ignore`, `@ts-nocheck`, `eslint-disable`, `biome-ignore`, `istanbul ignore`), skipped or weakened tests (`.skip`, `.todo`, deleted assertions), empty `catch {}` blocks, or unimplemented stubs added to get green.
+- **Structural & API Hygiene (Important):** Flag feature logic leaking into shared modules, refactors that relocate complexity without reducing concepts, and additions to already large files (`~1000+` lines) without decomposing first. On state-changing APIs or retried jobs, verify idempotency keys are client- or intent-derived (never per-retry UUID or timestamp), claimed atomically via a unique constraint (no `SELECT` then `INSERT` race), payload-checked (`422` on mismatch), and retained longer than retry or dead-letter windows.
 - **Edge & Zero-Bloat Runtime (Important):** Flag unnecessary third-party utility imports when native platform APIs (`structuredClone`, `Intl`, `URLPattern`, `fetch`, `AbortSignal.timeout`) suffice. For Edge runtimes, block Node-only built-ins (`node:fs`, `Buffer`, `readline`) and unsupported syntax.
 
 ---
 
 ## 6. Verification After Review
-Before approving, run the project's verification suite (tests, coverage, typecheck, lint, bundle size check, and browser/a11y E2E where applicable) and report exact pass/fail results.
+Before running probes, confirm a clean checkout on the reviewed ref (`git status --short` and `git rev-parse HEAD`). Verify each finding against callers and guards before reporting (zero findings is a valid result). When branch coverage looks thin, spot-check with a one-condition mutation probe (invert one new condition, confirm a test fails, restore). Run the project's verification suite (tests, coverage, typecheck, lint, bundle size check, and browser/a11y E2E where applicable) and report exact pass/fail results.
