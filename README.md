@@ -21,7 +21,10 @@ npx skills add pinguxx/skills --skill javascript-review --global
 | Skill | Purpose |
 | :--- | :--- |
 | `plan` | Concise, file-level implementation plans with invariants, edge cases, and exact verification gates before coding. |
+| `implement-plan` | Step-by-step execution of an approved plan with tight test loops, zero scope creep, diff cleanup, and full verification gates. |
 | `javascript-review` | Code review for JS/TS, Web Components, reactivity, async flows, Shadow DOM dark mode, pointer safety, WCAG 2.2 AA, and security. |
+| `a11y-audit` | Dedicated WCAG 2.2 AA and WAI-ARIA APG audit covering semantics, light/dark contrast, keyboard navigation, focus traps, ARIA, and `axe-core`. |
+| `security-audit` | Threat-focused review for XSS/DOM sinks, URL sanitization, prototype pollution, injection, path traversal, SSRF, auth/CORS/CSRF, and secret leaks. |
 | `code-unslop` | Pre-commit diff cleanup pass that removes redundant comments, section banners, filler docstrings, and dead wrappers. |
 | `unslop` | 30-rule editing pass to strip AI writing tells from READMEs, docs, release notes, and blog posts. |
 | `formal-verification` | Generates a project-local formal verification skill and bounded/state-space verifier for high-consequence invariants. |
