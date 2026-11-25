@@ -65,6 +65,7 @@ When running directly from a clone of this repository, use `skills/google-rust-s
 | `javascript-review` | Code review for JS/TS, Web Components, reactivity, async flows, Shadow DOM dark mode, pointer safety, anti-shortcut floor, and API hygiene. |
 | `a11y-audit` | Dedicated WCAG 2.2 AA and WAI-ARIA APG audit covering semantics, light/dark contrast, keyboard navigation, focus traps, ARIA, and `axe-core`/`pa11y`. |
 | `ui-stress-test` | Adversarial UI testing across viewports, light/dark contrast, UI states, extreme content, keyboard focus, and rapid interactions. |
+| `design-craft` | Structured UI design workflow: `DESIGN.md` context, 4-part briefs, multi-variant exploration, refinement vocabulary (`critique`, `bolder`, `quieter`, `distill`, `normalize`, `polish`), and anti-slop checks. |
 | `web-perf` | Measure-first web and backend performance profiling covering Core Web Vitals, `EXPLAIN ANALYZE`, connection pools, caches, and keep-or-revert budgets. |
 | `mobile-craft` | Mobile-native CSS and touch standards (`touch-action`, sticky hover guards, iOS zoom prevention, `100dvh`, safe areas). |
 | `motion-craft` | CSS transition and animation standards (explicit properties, tight durations, origin-aware overlays, reduced motion). |
@@ -87,23 +88,25 @@ Use the skills in order from first spec to release when building a new project f
 
 1. **Create the spec and plan (`spec`, `plan`)**
    When starting a new project from scratch, or tackling an ambiguous or multi-module request, run `spec` first to settle assumptions, tech stack, commands, project layout, measurable success criteria, and three-tier boundaries. After approving the spec, run `plan` to map the exact files to create or change, invariants, edge cases, and verification gates.
-2. **Build step by step (`implement-plan`, `debug`)**
+2. **Establish UI direction (`design-craft`)**
+   For user-facing web UI, create or read `DESIGN.md` (`ALWAYS`/`NEVER` guardrails), explore 2 to 3 distinct layout variants before committing, and steer iterations with `critique`, `bolder`, `quieter`, `distill`, `normalize`, and `polish`.
+3. **Build step by step (`implement-plan`, `debug`)**
    Execute the approved plan one step at a time with `implement-plan`. Run the narrowest test after each step and keep edits scoped to the plan. When a test fails or behavior breaks, run `debug` to isolate the root cause and write a failing-first regression test before fixing.
-3. **Polish UI behavior (`mobile-craft`, `motion-craft`)**
+4. **Polish UI behavior (`mobile-craft`, `motion-craft`)**
    When building web UI, apply `mobile-craft` for touch targets, `100dvh`, safe areas, and sticky-hover guards, and `motion-craft` for explicit transitions and reduced-motion rules.
-4. **Verify critical invariants (`formal-verification`)**
+5. **Verify critical invariants (`formal-verification`)**
    If the project has stateful logic, concurrency, reactive graphs, parsers, or security boundaries where unit tests miss edge cases, run `formal-verification` to generate a fast, project-local verifier.
-5. **Audit code, accessibility, security, performance, and UI (`javascript-review`, `a11y-audit`, `security-audit`, `web-perf`, `ui-stress-test`)**
+6. **Audit code, accessibility, security, performance, and UI (`javascript-review`, `a11y-audit`, `security-audit`, `web-perf`, `ui-stress-test`)**
    - Run `javascript-review` on the diff for modern JS/TS, async races, leaks, Shadow DOM traps, and anti-shortcut checks.
    - Run `a11y-audit` to verify WCAG 2.2 AA contrast, keyboard navigation, focus traps, and ARIA contracts.
    - Run `security-audit` to check DOM sinks, URL validation, prototype pollution, injection, SSRF, supply chain, and secrets.
    - Run `web-perf` when optimizing Core Web Vitals, bundle budgets, SQL query plans, or caches.
    - Run `ui-stress-test` across `320px` to `1440px`, light and dark modes, UI states, extreme content, and rapid interactions.
-6. **Simplify and clean the diff and docs (`simplify`, `code-unslop`, `unslop`)**
+7. **Simplify and clean the diff and docs (`simplify`, `code-unslop`, `unslop`)**
    Run `simplify` on complex working code to reduce nesting and speculative abstractions without changing behavior. Run `code-unslop` on `git diff` to remove redundant comments, section banners, and dead wrappers. Run `unslop` on `README.md`, docs, and release notes to strip AI writing tells.
-7. **Release (`release-hygiene`)**
+8. **Release (`release-hygiene`)**
    Before tagging, run `release-hygiene` to sweep the repo for stale version numbers, check doc drift, prune dead files, audit lockfile dependencies, sync changelogs, and verify every test, typecheck, build, and size gate passes.
-8. **Run a retrospective (`retro`)**
+9. **Run a retrospective (`retro`)**
    After shipping a milestone or finishing a rough session, run `retro` (user-invoked via `/retro` or `use retro`) to add missing navigation pointers, wire deterministic lint or CI checks for mechanical mistakes, and prune bloated `AGENTS.md` rules.
 
 ## Workflow: building and shipping a Rust project
