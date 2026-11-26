@@ -16,6 +16,7 @@ Audit the target page, component, or diff across all 6 areas below. Categorize f
 
 ## 2. Color Contrast & Visual Accessibility
 - Verify WCAG 2.2 AA contrast in both light and dark modes (`>= 4.5:1` for normal text, `>= 3:1` for large text `>= 18.67px` (`14pt`) bold / `>= 24px` (`18pt`) regular and UI controls/borders/focus indicators). Never round a failing contrast ratio up.
+- **Separate solid-fill tokens from foreground-text tokens:** A brand fill color calibrated for white text on a solid button (e.g. `#2563eb` or `#dc2626`) drops to `2.0:1–3.4:1` when reused as text or icon color on a dark surface. Ghost buttons, links, active tabs, validation errors, chips, spinners, and status icons MUST use dedicated foreground text tokens (e.g. `--color-primary-text`, `--color-danger-text`) verified in both light and dark modes, including hover/active states.
 - Never convey state (error, success, required, selected) by color alone; pair with text, icons, or attributes (`aria-invalid`, `aria-current`, `aria-selected`).
 - Keep interactive target sizes `>= 24x24px` size or spacing for WCAG 2.2 AA (SC 2.5.8); target `>= 44x44px` on touch (SC 2.5.5 AAA).
 - Verify layout and focus visibility under Windows High Contrast (`forced-colors: active`), support `prefers-reduced-motion: reduce` for all animations, avoid fixed heights that clip text at `200%` zoom, forbid content flashing `> 3` times per second (SC 2.3.1), and never autoplay audio or video without controls (SC 1.4.2).

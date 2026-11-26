@@ -41,7 +41,7 @@ Audit changes across the 6 areas below. Categorize every finding as **Blocking**
 ---
 
 ## 4. Accessibility & Motion Craft
-- **WCAG 2.2 AA Contrast & Focus (Blocking):** Maintain `>= 4.5:1` text contrast and `>= 3:1` UI control contrast in both light and dark modes, `>= 24x24px` hit targets, and visible `:focus-visible` outlines (never `outline: none` without a `:focus-visible` replacement).
+- **WCAG 2.2 AA Contrast & Focus (Blocking):** Maintain `>= 4.5:1` text contrast and `>= 3:1` UI control contrast in both light and dark modes, `>= 24x24px` hit targets, and visible `:focus-visible` outlines (never `outline: none` without a `:focus-visible` replacement). Never reuse solid-fill brand tokens (`--color-primary`, `--color-danger`, `--color-success`) as foreground text/icon `color:` on transparent or dark surfaces (ghost buttons, links, error messages, active items); require dedicated `*-text` foreground tokens.
 - **Keyboard State Machines (Important):** Interactive composite widgets (dialogs, menus, tabs, trees, calendars, comboboxes) must support WAI-ARIA APG keyboard navigation (`Arrow*`, `Home`/`End`, `Enter`/`Space`, `Escape`) and restore focus when overlays close.
 - **Motion Contracts (Blocking):** Never use `transition: all` (list explicit properties). Every `@keyframes` animation must respect `@media (prefers-reduced-motion: reduce)`.
 

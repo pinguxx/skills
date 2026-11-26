@@ -14,8 +14,8 @@ Before declaring a component or page done, actively try to break it across every
 
 ## 2. Light & Dark Mode Contrast
 - Toggle the app theme between light and dark modes (and `prefers-color-scheme: dark`).
-- Inspect default, hover, focus, active, and disabled states for every button, badge, alert, input, tooltip, and link.
-- Verify WCAG 2.2 AA contrast (`>= 4.5:1` for normal text, `>= 3:1` for large text and UI controls).
+- Inspect default, hover, focus, active, and disabled states for every button (especially `ghost` and `outline`), badge, chip, alert, input error, tooltip, spinner, and link.
+- Verify WCAG 2.2 AA contrast (`>= 4.5:1` for normal text, `>= 3:1` for large text and UI controls). Flag any solid-fill brand token (`--color-primary`, `--color-danger`, `--color-success`) used directly as foreground `color:` on transparent or dark surfaces instead of a dedicated `*-text` token.
 - For Shadow DOM components, confirm zero dead `:root[data-theme="dark"]` selectors and zero invalid `:host-context(...):host(...)` chains.
 
 ## 3. Extreme Content & UI States
