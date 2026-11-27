@@ -39,6 +39,7 @@ Audit the target page, component, or diff across all 6 areas below. Categorize f
 - Verify dark-mode tokens inherit cleanly into Shadow DOM without dead `:root[data-theme="dark"]` or invalid `:host-context(...):host(...)` rules.
 
 ## 6. Automated & Manual Verification
+- Run the bundled contrast matrix scanner against any CSS token sheet to verify every text-on-surface pairing mathematically in light and dark modes (`python3 scripts/check_contrast.py path/to/tokens.css`).
 - Map every **Blocking** violation to a WCAG 2.2 Success Criterion; preferences without an SC or APG contract belong in **Nit**.
 - Run automated accessibility checks (`@axe-core/playwright`, `jest-axe`, `@axe-core/cli`, or `pa11y`) in both light and dark themes when available. Confirm each tool exited validly and produced non-empty parseable output; never report a crashed tool or empty output as zero violations.
 - Automated checks and code reading cannot prove screen-reader announcements. Tag AT-dependent items `manual` with the browser and screen reader pair to test (for example Chrome + NVDA or Safari + VoiceOver) unless that test was executed.

@@ -31,11 +31,16 @@ When iterating on an existing screen, map short steering directives to concrete 
 - **`normalize`**: Replace hardcoded hex colors, ad-hoc spacing, and stray radii with the project's design tokens and `DESIGN.md` scale.
 - **`polish`**: Tighten alignment, optical padding, hover/focus/active states, loading/empty states, and micro-copy.
 
-## 4. Deterministic UI Anti-Slop Checklist
+## 4. Typography, Micro-Copy & Persistent Taste Memory
+- **Typography:** Apply `text-wrap: balance` on display headings, `text-wrap: pretty` on body prose (`max-width: 65ch`), `font-variant-numeric: tabular-nums` on numbers/KPIs/tables, and concentric radii (`outer radius = inner radius + padding`).
+- **Actionable UI micro-copy:** Use verb-first button labels ("Save workspace", not "Submit" or "OK"). Every error state and empty state must explain what happened and the next concrete action.
+- **Remember keep/reject decisions:** When the user accepts or rejects a visual choice, append a one-line decision to `DESIGN.md` so later screens never drift back to rejected patterns.
+
+## 5. Deterministic UI Anti-Slop Checklist
 Before shipping any UI diff, check for and remove these patterns:
 1. **Default AI palettes:** unrequested purple/cyan gradients or neon glow borders.
 2. **Eyebrow + colored-word spam:** repeating uppercase tracked pills above every section heading or highlighting one word in every headline.
 3. **Card-in-card nesting:** wrapping cards inside cards or putting heavy `1px solid` gray borders on every container instead of using whitespace and subtle surface contrast.
 4. **Hardcoded colors:** inline hex/rgb colors that break dark mode instead of semantic tokens.
-5. **Transition bloat:** `transition: all` or slow (`> 300ms`) entrance animations.
+5. **Transition bloat:** `transition: all`, `scale(0)` pops, layout-property transitions (`width`/`height`/`top`/`left`), or slow (`> 300ms`) entrance animations.
 6. **Fake copy:** generic buzzwords ("Supercharge your workflow", "Unlock next-gen AI") instead of concrete product language.

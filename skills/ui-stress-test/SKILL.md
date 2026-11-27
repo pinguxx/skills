@@ -19,7 +19,7 @@ Before declaring a component or page done, actively try to break it across every
 - For Shadow DOM components, confirm zero dead `:root[data-theme="dark"]` selectors and zero invalid `:host-context(...):host(...)` chains.
 
 ## 3. Extreme Content & UI States
-- Verify all five UI states where applicable: `loading`, `empty`, `error`, `success`, and `permission`.
+- **State matrix:** Inspect every interactive component across all reachable states in both light and dark modes (`default`, `hover`, `focus-visible`, `active`, `disabled`, plus `loading`, `empty`, `error`, `success`, and `permission`).
 - Test empty states (`""`, `[]`, `null`), 1-character labels, 120-character unbroken strings, and 50+ list items.
 - Verify avatars and icons never squish (`flex-shrink: 0`), long titles wrap or truncate cleanly without blowing out grid columns (`min-width: 0`), and live counters use `font-variant-numeric: tabular-nums`.
 
