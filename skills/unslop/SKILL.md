@@ -39,3 +39,13 @@ Rule numbers are stable ids that other skills cite. A removed rule leaves a gap.
 28. Use the plain word: "use", not "utilize" or "leverage".
 29. No metaphor, aphorism, personified code, or figurative verb where a literal phrase exists.
 30. Write whole sentences with their articles and verbs. Spell out arrows and abbreviations.
+
+## Automated mechanical scan
+
+Run the bundled zero-dependency scanner first to catch mechanical violations (rules 3, 4, 5, 9, 15, 18, 21, 28) while skipping code blocks and URLs:
+
+```bash
+python3 scripts/check_unslop.py <file1.md> [file2.md ...]
+```
+
+Fix every reported finding, then do a manual pass for the remaining judgment-based rules.
