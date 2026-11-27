@@ -44,3 +44,9 @@ Before shipping any UI diff, check for and remove these patterns:
 4. **Hardcoded colors:** inline hex/rgb colors that break dark mode instead of semantic tokens.
 5. **Transition bloat:** `transition: all`, `scale(0)` pops, layout-property transitions (`width`/`height`/`top`/`left`), or slow (`> 300ms`) entrance animations.
 6. **Fake copy:** generic buzzwords ("Supercharge your workflow", "Unlock next-gen AI") instead of concrete product language.
+
+## 6. Emotional Design & Anti-Dark-Pattern Guardrails
+Features are easy to clone; how the product feels is the edge:
+- **Nail the first 5 seconds:** Define a warm welcome moment and one low-friction starter action that defuses domain intimidation and gives a quick first win.
+- **Celebrate small wins:** Give milestone states (daily goal reached, queue cleared, first item completed) a warm, unmistakable success state—never a flat `"Done."`.
+- **No dark patterns:** Never use guilt-tripping streak-loss copy, fake countdown urgency, or harsh wrong-answer buzzers. Keep momentum encouraging and calm.
